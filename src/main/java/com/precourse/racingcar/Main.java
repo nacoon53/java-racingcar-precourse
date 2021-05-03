@@ -1,6 +1,8 @@
 package com.precourse.racingcar;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -29,6 +31,10 @@ public class Main {
 		for(int i = 0; i < count; i++) { //시도 횟수만큼 반복
 			carList = mainObj.pushCar(carList);
 		}
+		
+		//우승한 자동차 구하기
+		List<Car> winList = mainObj.getWinCars(carList);
+		
 		
 		
 		
@@ -59,5 +65,34 @@ public class Main {
 		}
 		
 		return list;
+	}
+	
+	public List<Car> getWinCars(List<Car> list) {
+		List<Car> winList = new ArrayList<Car>();
+		Collections.sort((List<Car>) list, new Comparator() {
+			@Override
+			public int compare(Object o1, Object o2) {
+				int num1 = ((Car)o1).getGoCount();
+				int num2 = ((Car)o2).getGoCount();
+				
+				if(num1 > num2) {
+					return -1;
+				}else if(num1< num2) {
+					return 1;
+				}
+				return 0;
+			}
+		});
+		
+		int winPushCount = list.get(0).getGoCount();
+		
+		for(int i = 0; i<list.size(); i++) {
+			if(i != 0 && winPushCount != list.get(i).getGoCount()) {
+				break;
+			}
+			winList.add(list.get(i));
+		}
+		
+		return winList;
 	}
 }
