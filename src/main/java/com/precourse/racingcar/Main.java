@@ -28,8 +28,10 @@ public class Main {
 		
 		
 		//각 자동차마다 랜덤값을 구해 4 이상일 경우 전진하고, 3이하일 경우 멈춘다.
+		System.out.println("\n실행 결과");
 		for(int i = 0; i < count; i++) { //시도 횟수만큼 반복
 			carList = mainObj.pushCar(carList);
+			mainObj.printPushResult(carList); //실행결과 출력
 		}
 		
 		//우승한 자동차 구하기
@@ -67,6 +69,22 @@ public class Main {
 		}
 		
 		return list;
+	}
+	
+	public void printPushResult(List<Car> list) {
+		String str = "";
+		
+		for(int i = 0; i<list.size(); i++) {
+			str = "";	
+			
+			for(int j=0; j < list.get(i).getGoCount(); j++) {
+				str += "-";
+			}		
+			
+			System.out.println(list.get(i).getName() + " : " + str);		
+		}
+		
+		System.out.println("");
 	}
 	
 	public List<Car> getWinCars(List<Car> list) {
