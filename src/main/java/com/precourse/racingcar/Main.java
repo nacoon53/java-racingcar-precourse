@@ -2,6 +2,7 @@ package com.precourse.racingcar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -24,6 +25,10 @@ public class Main {
 		carList = mainObj.createCarList(inputText);
 		
 		
+		//각 자동차마다 랜덤값을 구해 4 이상일 경우 전진하고, 3이하일 경우 멈춘다.
+		for(int i = 0; i < count; i++) { //시도 횟수만큼 반복
+			carList = mainObj.pushCar(carList);
+		}
 		
 		
 		
@@ -37,6 +42,20 @@ public class Main {
 		for(String name : names) {
 			Car car = new Car(name);
 			list.add(car);
+		}
+		
+		return list;
+	}
+	
+	public List<Car> pushCar(List<Car> list) {
+		Random rand = new Random();
+		int randNum = 0;
+		
+		for(Car car : list) {
+			randNum = rand.nextInt(10); //0~9까지의 랜덤 수 구하기
+			if(randNum >= 4) {
+				car.goCountPlus();
+			}
 		}
 		
 		return list;
