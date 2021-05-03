@@ -35,6 +35,8 @@ public class Main {
 		//우승한 자동차 구하기
 		List<Car> winList = mainObj.getWinCars(carList);
 		
+		//우승한 자동차 출력하기
+		mainObj.printWinCars(winList);
 		
 		
 		
@@ -94,5 +96,18 @@ public class Main {
 		}
 		
 		return winList;
+	}
+	
+	public void printWinCars(List<Car> list) {
+		String str = "";
+		for(int i = 0; i < list.size(); i++) {
+			str += list.get(i).getName();
+			if(i < list.size()-1) {
+				str += ", ";
+			}
+		}
+		str += "가 최종 우승했습니다.";
+		
+		System.out.println(str);
 	}
 }
